@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/deciphernow/synonyms/wordnet"
@@ -13,14 +14,23 @@ import (
 // main sets up and launches server
 func main() {
 	http.HandleFunc("/", sentenceHandler)
-	log.Println("Listening on *:8080")
-	http.ListenAndServe(":8080", nil)
+	port := ":8080"
+	if len(os.Args) > 1 {
+		port = ":" + os.Args[1]
+	}
+	log.Printf("Listening on %s\n", port)
+	log.Fatal(http.ListenAndServe(port, nil))
 }
 
 // sentenceHandler handles requests for a whole sentence.
 // Prints all words in all synsets that contain each word in the sentence, in sentence order.
 func sentenceHandler(w http.ResponseWriter, r *http.Request) {
-	sentence := r.FormValue("q")
+	var sentence string
+	if vals, ok := r.Header["Q"]; ok {
+		sentence = vals[0]
+	} else {
+		sentence = r.FormValue("q")
+	}
 	tokens := wordnet.Tokenize(sentence)
 	switch {
 	case strings.HasSuffix(r.URL.Path, ".json"):
