@@ -32,10 +32,8 @@ func init() {
 	nonAlphanumeric = regexp.MustCompile("\\W+")
 	stopwords = regexp.MustCompile("\\s+(I|a|an|as|at|by|he|she|his|hers|it|its|me|or|thou|us|who)\\s")
 
-	currentDirectory, err := os.Getwd()
-	if err != nil {
-		log.Fatal(err)
-	}
+	currentDirectory := path.Join(os.TempDir(), "synonyms-service-wordnet-db")
+	os.Mkdir(currentDirectory, 755)
 
 	downloadDatabase(currentDirectory)
 
@@ -172,8 +170,6 @@ func downloadDatabase(intoDirectory string) {
 // ungzip originally from http://blog.ralch.com/tutorial/golang-working-with-tar-and-gzip/
 
 func ungzip(source, target string) error {
-	log.Println("source: " + source)
-	log.Println("target: " + target)
 	reader, err := os.Open(source)
 	if err != nil {
 		return err
