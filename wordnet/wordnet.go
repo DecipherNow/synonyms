@@ -140,31 +140,41 @@ func downloadDatabase(intoDirectory string) {
 		log.Println("Downloading WordNet 3.1 database files...")
 		out, err := os.Create(path.Join(intoDirectory, "dict.tar.gz"))
 		if err != nil {
+			log.Println("Couldn't create file dict.tar.gz in " + intoDirectory)
 			log.Fatal(err)
 		}
 		resp, err := http.Get("http://wordnetcode.princeton.edu/wn3.1.dict.tar.gz")
 		if err != nil {
+			log.Println("Download failed")
 			log.Fatal(err)
 		}
 		defer resp.Body.Close()
 		_, err = io.Copy(out, resp.Body)
 		if err != nil {
+			log.Println("Couldn't write file after download")
 			log.Fatal(err)
 		}
 
 		// extract it
 		if err := ungzip(path.Join(intoDirectory, "dict.tar.gz"), intoDirectory); err != nil {
+			log.Println("Couldn't ungzip file")
 			log.Fatal(err)
 		}
 		if err := untar(path.Join(intoDirectory, "dict.tar"), intoDirectory); err != nil {
+			log.Println("Couldn't untar file")
 			log.Fatal(err)
 		}
+		// Cleanup
+		os.Remove(path.Join(intoDirectory, "dict.tar.gz"))
+		os.Remove(path.Join(intoDirectory, "dict.tar"))
 	}
 }
 
-// ungzip from http://blog.ralch.com/tutorial/golang-working-with-tar-and-gzip/
+// ungzip originally from http://blog.ralch.com/tutorial/golang-working-with-tar-and-gzip/
 
 func ungzip(source, target string) error {
+	log.Println("source: " + source)
+	log.Println("target: " + target)
 	reader, err := os.Open(source)
 	if err != nil {
 		return err
@@ -177,7 +187,8 @@ func ungzip(source, target string) error {
 	}
 	defer archive.Close()
 
-	target = filepath.Join(target, archive.Name)
+	ext := regexp.MustCompile("\\.gz$")
+	target = ext.ReplaceAllString(filepath.Join(target, path.Base(source)), "")
 	writer, err := os.Create(target)
 	if err != nil {
 		return err
@@ -188,7 +199,7 @@ func ungzip(source, target string) error {
 	return err
 }
 
-// untar from http://blog.ralch.com/tutorial/golang-working-with-tar-and-gzip/
+// untar originally from http://blog.ralch.com/tutorial/golang-working-with-tar-and-gzip/
 func untar(tarball, target string) error {
 	reader, err := os.Open(tarball)
 	if err != nil {
