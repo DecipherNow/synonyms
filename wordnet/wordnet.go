@@ -28,7 +28,7 @@ type Synsets struct {
 // TODO Download WordNet database if it doesn't exist where expected
 
 // Initialize pulls WordNet's synset database into memory
-func Initialize() *Synsets {
+func init() {
 	nonAlphanumeric = regexp.MustCompile("\\W+")
 	stopwords = regexp.MustCompile("\\s+(I|a|an|as|at|by|he|she|his|hers|it|its|me|or|thou|us|who)\\s")
 
@@ -96,7 +96,6 @@ func Initialize() *Synsets {
 			}
 		}
 	}
-	return synsets
 }
 
 // Tokenize is a relatively naive sentence tokenizer
