@@ -6,12 +6,25 @@ A small service for returning the synonyms for each meaningful word in a sentenc
 Building and Installing
 -----------------------
 
+### Manually
+
 The synonyms service is written in [golang](https://golang.org/). If Go is correctly installed, you should be able to acquire and install the source in the usual way with
 
 ```{bash}
 go get github.com/deciphernow/synonyms
 go install github.com/deciphernow/synonyms
 ```
+
+### With Docker
+
+To build a container image from the Dockerfile:
+
+```{bash}
+cd $GOPATH/src/github.com/deciphernow/synonyms
+docker build -i synonyms .
+```
+
+The resulting image will be tagged as "synonyms".
 
 Usage
 -----
@@ -45,6 +58,16 @@ and a GET to `localhost:8080/synonyms.json?q=Hello, World!` will return
 ```
 
 The synonyms service also supports querying instead by header. A GET to `localhost:8080/synonyms.json` with the header `Q: Hello, World!` returns the same JSON output as above. Similarly, GET to `localhost:8080` with that header returns the same text output as above.
+
+### With Docker
+
+Once a synonyms image is built (see above), you can run it with, e.g.:
+
+```{bash}
+docker run -it --publish 6060:8080 --name synonyms-live --rm synonyms
+```
+
+This will run an interactive container from the synonyms image, publishing internal port 8080 on external port 6060 with the name synonyms-live, and cleaning up the container filesystem upon exit.
 
 Roadmap
 -------
