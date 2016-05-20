@@ -67,7 +67,7 @@ Once a synonyms image is built (see above), you can run it with, e.g.:
 docker run -it --publish 6060:8080 --name synonyms-live --rm synonyms
 ```
 
-This will run an interactive container from the synonyms image, publishing internal port 8080 on external port 6060 with the name synonyms-live, and cleaning up the container filesystem upon exit.
+This will run an interactive container named "synonyms-live" from the synonyms image, publishing internal port 8080 on external port 6060, and cleaning up the container filesystem upon exit.
 
 Roadmap
 -------
@@ -102,5 +102,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
-
