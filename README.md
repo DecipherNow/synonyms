@@ -20,7 +20,7 @@ go install github.com/deciphernow/synonyms
 To build a container image from the Dockerfile:
 
 ```{bash}
-cd $GOPATH/src/github.com/deciphernow/synonyms
+# from the source directory
 docker build -i synonyms .
 ```
 
