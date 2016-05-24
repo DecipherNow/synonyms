@@ -134,22 +134,25 @@ func deDup(s []string) []string {
 func downloadDatabase(intoDirectory string) {
 	// Don't already have it? Download it.
 	if _, err := os.Stat(path.Join(intoDirectory, "dict")); os.IsNotExist(err) {
-		log.Println("Downloading WordNet 3.1 database files...")
-		out, err := os.Create(path.Join(intoDirectory, "dict.tar.gz"))
-		if err != nil {
-			log.Println("Couldn't create file dict.tar.gz in " + intoDirectory)
-			log.Fatal(err)
-		}
-		resp, err := http.Get("http://wordnetcode.princeton.edu/wn3.1.dict.tar.gz")
-		if err != nil {
-			log.Println("Download failed")
-			log.Fatal(err)
-		}
-		defer resp.Body.Close()
-		_, err = io.Copy(out, resp.Body)
-		if err != nil {
-			log.Println("Couldn't write file after download")
-			log.Fatal(err)
+
+		if _, err := os.Stat(path.Join(intoDirectory, "dict.tar.gz")); os.IsNotExist(err) {
+			out, err := os.Create(path.Join(intoDirectory, "dict.tar.gz"))
+			if err != nil {
+				log.Println("Couldn't create file dict.tar.gz in " + intoDirectory)
+				log.Fatal(err)
+			}
+			log.Println("Downloading WordNet 3.1 database files...")
+			resp, err := http.Get("http://wordnetcode.princeton.edu/wn3.1.dict.tar.gz")
+			if err != nil {
+				log.Println("Download failed")
+				log.Fatal(err)
+			}
+			defer resp.Body.Close()
+			_, err = io.Copy(out, resp.Body)
+			if err != nil {
+				log.Println("Couldn't write file after download")
+				log.Fatal(err)
+			}
 		}
 
 		// extract it

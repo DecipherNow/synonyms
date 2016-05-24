@@ -17,14 +17,25 @@ go install github.com/deciphernow/synonyms
 
 ### With Docker
 
-To _build_ a container image from the Dockerfile:
+To build synonyms in a container:
 
 ```{bash}
-# from the source directory
-docker build -t deciphernow/synonyms .
+# from the repo root:
+docker run --rm \
+           -v "$PWD":/go/src/github.com/deciphernow/synonyms \
+           -w /go/src/github.com/deciphernow/synonyms \
+           iron/go:dev \
+           go build -o synonyms
 ```
 
-The resulting image will be tagged as "deciphernow/synonyms".
+Which produces a "synonyms" binary in the repo root and terminates.
+
+We now build the `deciphernow/synonyms` production image with
+
+```{bash}
+# still from the repo root:
+docker build -t deciphernow/synonyms .
+```
 
 Alternatively, the image is on Docker Hub, and may be retrieved with
 
@@ -69,13 +80,13 @@ The synonyms service also supports querying instead by header. A GET to `localho
 
 ### With Docker
 
-Once a synonyms image exists (see above), you can run it with, e.g.:
+Once the `deciphernow/synonyms` image exists locally (see above), you can run it with, e.g.:
 
 ```{bash}
-docker run --publish 6060:8080 --name synonyms-live --rm deciphernow/synonyms
+docker run --publish 6060:8080 --rm deciphernow/synonyms
 ```
 
-This will run a container named "synonyms-live" from the "deciphernow/synonyms" image, publishing internal port 8080 on external port 6060, and cleaning up the container filesystem upon exit.
+This will run the `deciphernow/synonyms` image in a container, publishing internal port 8080 on external port 6060, and cleaning up the container filesystem upon exit.
 
 Roadmap
 -------
