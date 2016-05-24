@@ -72,10 +72,10 @@ The synonyms service also supports querying instead by header. A GET to `localho
 Once a synonyms image exists (see above), you can run it with, e.g.:
 
 ```{bash}
-docker run -it --publish 6060:8080 --name synonyms-live --rm deciphernow/synonyms
+docker run --publish 6060:8080 --name synonyms-live --rm deciphernow/synonyms
 ```
 
-This will run an interactive container named "synonyms-live" from the "deciphernow/synonyms" image, publishing internal port 8080 on external port 6060, and cleaning up the container filesystem upon exit.
+This will run a container named "synonyms-live" from the "deciphernow/synonyms" image, publishing internal port 8080 on external port 6060, and cleaning up the container filesystem upon exit.
 
 Roadmap
 -------

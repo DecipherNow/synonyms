@@ -9,7 +9,7 @@ ADD . /go/src/github.com/deciphernow/synonyms
 RUN go install github.com/deciphernow/synonyms
 
 # Run the synonyms command by default when the container starts.
-ENTRYPOINT /go/bin/synonyms
+ENTRYPOINT ["/go/bin/synonyms"]
 
 # Document that the service listens on port 8080.
 EXPOSE 8080
