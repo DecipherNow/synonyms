@@ -26,7 +26,7 @@ docker build -t deciphernow/synonyms .
 
 The resulting image will be tagged as "deciphernow/synonyms".
 
-Alternatively, the images is on Docker Hub, and may be retrieved with
+Alternatively, the image is on Docker Hub, and may be retrieved with
 
 ```{bash}
 docker pull deciphernow/synonyms
