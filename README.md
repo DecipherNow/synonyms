@@ -35,6 +35,8 @@ docker pull deciphernow/synonyms
 Usage
 -----
 
+### Manual
+
 If $GOPATH/bin is in your $PATH, you can launch the synonyms service with
 
 ```{bash}
