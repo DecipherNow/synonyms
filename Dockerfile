@@ -3,7 +3,7 @@
 FROM golang
 
 # Copy the local package files to the container's workspace.
-ADD . /go/src/github.com/deciphernow/synonyms
+COPY . /go/src/github.com/deciphernow/synonyms
 
 # Build the synonyms command inside the container.
 RUN go install github.com/deciphernow/synonyms
