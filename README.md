@@ -43,10 +43,10 @@ Alternatively, the image is on Docker Hub, and may be retrieved with
 docker pull deciphernow/synonyms
 ```
 
-Usage
------
+Starting
+--------
 
-### Manual
+### Manual Start
 
 If $GOPATH/bin is in your $PATH, you can launch the synonyms service with
 
@@ -59,6 +59,19 @@ Otherwise, run with
 ```{bash}
 $GOPATH/bin/synonyms [port]
 ```
+
+### Docker Start
+
+Once the `deciphernow/synonyms` image exists locally (see above), you can run it with, e.g.:
+
+```{bash}
+docker run --publish 8080:8080 --rm deciphernow/synonyms
+```
+
+This will run the `deciphernow/synonyms` image in a container, publishing internal port 8080 on external port 8080, and cleaning up the container filesystem upon exit.
+
+Usage
+-----
 
 The service first checks for the presence of the WordNet database files in $TMPDIR/synonyms-service-wordnet-db/dict, and if not yet present, it downloads them (16Mb download, 53Mb uncompressed) to this location. Thereafter, the service listens on port 8080 (or first argument `port` if provided).
 
@@ -77,16 +90,6 @@ and a GET to `localhost:8080/synonyms.json?q=Hello, World!` will return
 ```
 
 The synonyms service also supports querying instead by header. A GET to `localhost:8080/synonyms.json` with the header `Q: Hello, World!` returns the same JSON output as above. Similarly, GET to `localhost:8080` with that header returns the same text output as above.
-
-### With Docker
-
-Once the `deciphernow/synonyms` image exists locally (see above), you can run it with, e.g.:
-
-```{bash}
-docker run --publish 6060:8080 --rm deciphernow/synonyms
-```
-
-This will run the `deciphernow/synonyms` image in a container, publishing internal port 8080 on external port 6060, and cleaning up the container filesystem upon exit.
 
 Roadmap
 -------
