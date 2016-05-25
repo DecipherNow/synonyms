@@ -17,7 +17,7 @@ go install github.com/deciphernow/synonyms
 
 ### With Docker
 
-For quickest results, we can use the prebuilt image on Docker Hub:
+For quickest results, we can use the prebuilt image (38 MB) on Docker Hub:
 
 ```{bash}
 docker pull deciphernow/synonyms
