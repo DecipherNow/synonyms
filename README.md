@@ -23,7 +23,13 @@ For quickest results, we can use the prebuilt image (38 MB) on Docker Hub:
 docker pull deciphernow/synonyms
 ```
 
-Alternatively, to build synonyms in a container:
+Or the minimal image (6 MB, which does not contain the WordNet DB, and will download it on startup):
+
+```{bash}
+docker pull deciphernow/synonyms:min
+```
+
+Alternatively, to _build_ synonyms in a container:
 
 ```{bash}
 # from the repo root:
@@ -41,6 +47,13 @@ We then build the `deciphernow/synonyms` production image with
 ```{bash}
 # still from the repo root:
 docker build -t deciphernow/synonyms .
+```
+
+Or to build the minimal image:
+
+```{bash}
+# still from the repo root:
+docker build -f Dockerfile.min -t deciphernow/synonyms:min .
 ```
 
 Starting
@@ -70,7 +83,7 @@ Once the `deciphernow/synonyms` image exists locally (see above), we can run it 
 docker run --publish 8080:8080 --rm deciphernow/synonyms
 ```
 
-This will run the `deciphernow/synonyms` image in a container, publishing internal port 8080 on external port 8080, and clean up the container filesystem upon exit.
+This will run the `deciphernow/synonyms` image in a container, publishing internal port 8080 on external port 8080, and clean up the container filesystem upon exit. Use `deciphernow/synonyms:min` to run the minimal image instead.
 
 Usage
 -----
