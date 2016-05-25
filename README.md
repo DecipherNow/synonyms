@@ -8,7 +8,7 @@ Building and Installing
 
 ### Manually
 
-The synonyms service is written in [golang](https://golang.org/). If Go is correctly installed, you should be able to acquire and install the source in the usual way with
+The synonyms service is written in [golang](https://golang.org/). If Go is correctly installed, we should be able to acquire and install the source in the usual way with
 
 ```{bash}
 go get github.com/deciphernow/synonyms
@@ -17,7 +17,13 @@ go install github.com/deciphernow/synonyms
 
 ### With Docker
 
-To build synonyms in a container:
+For quickest results, we can use the prebuilt image on Docker Hub:
+
+```{bash}
+docker pull deciphernow/synonyms
+```
+
+Alternatively, to build synonyms in a container:
 
 ```{bash}
 # from the repo root:
@@ -28,19 +34,13 @@ docker run --rm \
            go build -o synonyms
 ```
 
-Which produces a "synonyms" binary in the repo root and terminates.
+Which produces a "synonyms" Linux binary in the repo root and terminates.
 
-We now build the `deciphernow/synonyms` production image with
+We then build the `deciphernow/synonyms` production image with
 
 ```{bash}
 # still from the repo root:
 docker build -t deciphernow/synonyms .
-```
-
-Alternatively, the image is on Docker Hub, and may be retrieved with
-
-```{bash}
-docker pull deciphernow/synonyms
 ```
 
 Starting
@@ -48,7 +48,7 @@ Starting
 
 ### Manual Start
 
-If $GOPATH/bin is in your $PATH, you can launch the synonyms service with
+If $GOPATH/bin is in $PATH, we can launch the synonyms service with
 
 ```{bash}
 synonyms [port]
@@ -62,7 +62,7 @@ $GOPATH/bin/synonyms [port]
 
 ### Docker Start
 
-Once the `deciphernow/synonyms` image exists locally (see above), you can run it with, e.g.:
+Once the `deciphernow/synonyms` image exists locally (see above), we can run it with, e.g.:
 
 ```{bash}
 docker run --publish 8080:8080 --rm deciphernow/synonyms
