@@ -60,6 +60,8 @@ Otherwise, run with
 $GOPATH/bin/synonyms [port]
 ```
 
+The service first checks for the presence of the WordNet database files in $TMPDIR/synonyms-service-wordnet-db/dict, and if not yet present, it downloads them (16Mb download, 53Mb uncompressed) to this location. Thereafter, the service listens on port 8080 (or first argument `port` if provided).
+
 ### Docker Start
 
 Once the `deciphernow/synonyms` image exists locally (see above), we can run it with, e.g.:
@@ -72,8 +74,6 @@ This will run the `deciphernow/synonyms` image in a container, publishing intern
 
 Usage
 -----
-
-The service first checks for the presence of the WordNet database files in $TMPDIR/synonyms-service-wordnet-db/dict, and if not yet present, it downloads them (16Mb download, 53Mb uncompressed) to this location. Thereafter, the service listens on port 8080 (or first argument `port` if provided).
 
 Synonyms supports text and JSON output. A simple GET to `localhost:8080?q=Hello, World!` will return
 
