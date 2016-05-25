@@ -70,7 +70,7 @@ Once the `deciphernow/synonyms` image exists locally (see above), we can run it 
 docker run --publish 8080:8080 --rm deciphernow/synonyms
 ```
 
-This will run the `deciphernow/synonyms` image in a container, publishing internal port 8080 on external port 8080, and cleaning up the container filesystem upon exit.
+This will run the `deciphernow/synonyms` image in a container, publishing internal port 8080 on external port 8080, and clean up the container filesystem upon exit.
 
 Usage
 -----
