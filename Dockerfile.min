@@ -1,4 +1,4 @@
-FROM iron/go
+FROM alpine:edge
 
 # The minimal (tagged :min) image does not contain the WordNet DB,
 # downloading it as necessary upon startup

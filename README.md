@@ -23,7 +23,7 @@ For quickest results, we can use the prebuilt image (38 MB) on Docker Hub:
 docker pull deciphernow/synonyms
 ```
 
-Or the minimal image (6 MB, which does not contain the WordNet DB, and will download it on startup):
+Or the minimal image (5 MB, which does not contain the WordNet DB, and will download it on startup):
 
 ```{bash}
 docker pull deciphernow/synonyms:min
