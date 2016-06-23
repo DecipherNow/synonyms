@@ -12,10 +12,10 @@ dependencies:
 test:
   override:
     - docker run -d -p 8080:8080 deciphernow/synonyms; sleep 10
-    - curl --retry 10 --retry-delay 5 -v 'http://localhost:8080?q=Hello, World!'
-    - curl --retry 10 --retry-delay 5 -v 'http://localhost:8080' -H 'Q: Hello World!'
-    - curl --retry 10 --retry-delay 5 -v 'http://localhost:8080/synonyms.json?q=Hello, World!'
-    - curl --retry 10 --retry-delay 5 -v 'http://localhost:8080/synonyms.json' -H 'Q: Hello World!'
+    - "curl --retry 10 --retry-delay 5 -v 'http://localhost:8080?q=Hello, World!'"
+    - "curl --retry 10 --retry-delay 5 -v 'http://localhost:8080' -H 'Q: Hello World!'"
+    - "curl --retry 10 --retry-delay 5 -v 'http://localhost:8080/synonyms.json?q=Hello, World!'"
+    - "curl --retry 10 --retry-delay 5 -v 'http://localhost:8080/synonyms.json' -H 'Q: Hello World!'"
 
 deployment:
   hub:
