@@ -6,7 +6,7 @@ RUN chown -R daemon: $tmpdir
 
 USER daemon
 
-WORKDIR /app/
+WORKDIR /app
 COPY synonyms .
 
 ENTRYPOINT ["./synonyms"]
