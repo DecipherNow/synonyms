@@ -17,43 +17,10 @@ go install github.com/deciphernow/synonyms
 
 ### With Docker
 
-For quickest results, we can use the prebuilt image (38 MB) on Docker Hub:
+For quickest results, we can use the prebuilt image on Docker Hub:
 
 ```{bash}
 docker pull deciphernow/synonyms
-```
-
-Or the minimal image (5 MB, which does not contain the WordNet DB, and will download it on startup):
-
-```{bash}
-docker pull deciphernow/synonyms:min
-```
-
-Alternatively, to _build_ synonyms in a container:
-
-```{bash}
-# from the repo root:
-docker run --rm \
-           -v "$PWD":/go/src/github.com/deciphernow/synonyms \
-           -w /go/src/github.com/deciphernow/synonyms \
-           iron/go:dev \
-           go build -o synonyms
-```
-
-Which produces a "synonyms" Linux binary in the repo root and terminates.
-
-We then build the `deciphernow/synonyms` production image with
-
-```{bash}
-# still from the repo root:
-docker build -t deciphernow/synonyms .
-```
-
-Or to build the minimal image:
-
-```{bash}
-# still from the repo root:
-docker build -f Dockerfile.min -t deciphernow/synonyms:min .
 ```
 
 Starting
@@ -77,13 +44,13 @@ The service first checks for the presence of the WordNet database files in $TMPD
 
 ### Docker Start
 
-Once the `deciphernow/synonyms` image exists locally (see above), we can run it with, e.g.:
+We can run the `deciphernow/synonyms` image with, e.g.:
 
 ```{bash}
 docker run --publish 8080:8080 --rm deciphernow/synonyms
 ```
 
-This will run the `deciphernow/synonyms` image in a container, publishing internal port 8080 on external port 8080, and clean up the container filesystem upon exit. Use `deciphernow/synonyms:min` to run the minimal image instead.
+This will run the `deciphernow/synonyms` image in a container, publishing internal port 8080 on external port 8080, and cleaning up the container filesystem upon exit.
 
 Usage
 -----

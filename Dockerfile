@@ -1,15 +1,15 @@
-FROM iron/go
+FROM iron/go:dev
 
-ENV tmpdir /tmp/synonyms-service-wordnet-db
-ADD http://wordnetcode.princeton.edu/wn3.1.dict.tar.gz $tmpdir/dict.tar.gz
-RUN chown -R daemon: $tmpdir
+ENV dbdir /tmp/synonyms-service-wordnet-db
+ENV workdir /go/src/github.com/deciphernow/synonyms
+ENV PATH $PATH:/go/bin
 
-USER daemon
+ADD http://wordnetcode.princeton.edu/wn3.1.dict.tar.gz $dbdir/dict.tar.gz
 
-WORKDIR /app
-COPY synonyms .
+COPY . $workdir
 
-ENTRYPOINT ["./synonyms"]
-CMD ["8080"]
+WORKDIR $workdir
+
+CMD go install && synonyms 8080
 
 EXPOSE 8080
