@@ -1,0 +1,20 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker info
+    - docker build -t deciphernow/synonyms
+
+test:
+  override:
+    - docker run -d -p 8080:8080 deciphernow/synonyms; sleep 10
+    - curl --retry 10 --retry-delay 5 -v "http://localhost:8080?q=Hello, World"
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push deciphernow/synonyms
