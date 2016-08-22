@@ -5,7 +5,7 @@ machine:
 dependencies:
   override:
     - docker info
-    - docker build -t deciphernow/synonyms .
+    - docker build -t deciphernow/synonyms:$CIRCLE_SHA1 .
 
 test:
   override:
