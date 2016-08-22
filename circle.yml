@@ -9,7 +9,7 @@ dependencies:
 
 test:
   override:
-    - docker run -d -p 8080:8080 deciphernow/synonyms; sleep 5
+    - docker run -d -p 8080:8080 deciphernow/synonyms:$CIRCLE_SHA1; sleep 5
     - curl --retry 10 --retry-delay 5 -v "http://localhost:8080?q=Hello, World"
 
 deployment:
